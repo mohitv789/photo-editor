@@ -6,6 +6,7 @@ import {ImageEditorModule} from './image-editor/image-editor.module'
 
 
 import { AppComponent } from './app.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 
 @NgModule({
@@ -17,7 +18,9 @@ import { AppComponent } from './app.component';
     ImageEditorModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

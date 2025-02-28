@@ -14,7 +14,7 @@
 <!-- color and opacity picker -->
 <div class="picker-container" style="margin:12px 0px 0px 0px;">
   <button matTooltip="Color Picker" matTooltipPosition="above" [disabled]="isSelectionInactive" mat-icon-button [(colorPicker)]="color"
-    (colorPickerChange)="onUpdateShapeMask()" [cpWidth]="196" [cpDisableInput]="true" [cpPosition]="'bottom'" [cpPositionOffset]="'50%'"
+    (colorPickerChange)="onUpdateShapeMask()" [cpWidth]="'196'" [cpDisableInput]="true" [cpPosition]="'bottom'" [cpPositionOffset]="'50%'"
     [cpPositionRelativeToArrow]="true" [cpSaveClickOutside]="true">
   <i [style.color]="color " class="material-icons icons">color_lens</i>
   </button>

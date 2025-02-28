@@ -1,39 +1,44 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { UtilService } from '../util.service';
-import { Subscription }   from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-image-picker',
   templateUrl: './image-picker.component.html',
-  styleUrls: ['./image-picker.component.css']
+  styleUrls: ['./image-picker.component.css'],
+  standalone: false
 })
 export class ImagePickerComponent implements OnInit {
 
-  private fileInputElement: any;
-  private fileUrlList: string[] = [];
-  private loadingFiles: boolean;  //add loader while files is being loaded
-  private selection:any;
-  private index: number;
-  private orientation: string; 
+  fileInputElement: any;
+  fileUrlList: string[] = [];
+  loadingFiles: boolean;  //add loader while files is being loaded
+  selection:any;
+  index: number;
+  orientation: string; 
 
   // ---------------------------- Subscription ------------------------------
-  private onSelectionCreatedSubscription:Subscription;
+  onSelectionCreatedSubscription:Subscription;
   
   onUploadButtonTrigger():void{
     this.fileInputElement.click();
   }
 
-  onUpload(event:any):void {
-    if (event.target.files) {  
-      for( let i = 0, file; file = event.target.files[i]; i++ ){
-        var reader = new FileReader();        
-        reader.onload = (event) => {
-          this.fileUrlList = [...this.fileUrlList,event.target['result']];
-        }
-        reader.readAsDataURL(file)
+  onUpload(event: any): void {
+    if (event.target.files) {
+      for (let i = 0; i < event.target.files.length; i++) {
+        const file = event.target.files[i];  // Correctly assign file
+        const reader = new FileReader();
+  
+        reader.onload = (e: any) => {
+          this.fileUrlList = [...this.fileUrlList, e.target.result];
+        };
+  
+        reader.readAsDataURL(file);
       }
     }
   }
+  
 
   onClearByIndex(indexToRemove:number):void{
     this.fileUrlList = this.fileUrlList.filter(

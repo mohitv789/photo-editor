@@ -4,19 +4,22 @@ import { UtilService } from '../../util.service';
 @Component({
   selector: 'app-shape-mask-tools',
   templateUrl: './shape-mask-tools.component.html',
-  styleUrls: ['./shape-mask-tools.component.css']
+  styleUrls: ['./shape-mask-tools.component.css'],
+  standalone: false
 })
 export class ShapeMaskToolsComponent implements OnInit {
 
   @Input() selectedToolType;
   @Input() activeObjectProps;
 
-  private color: string;
-  private opacity: number; 
-  private shadowAmount: number;
-  private shadowBlur: number;
-  private shadowOffsetX: number;
-  private shadowOffsetY: number;
+  isSelectionInactive:boolean;
+
+  color: string;
+  opacity: number; 
+  shadowAmount: number;
+  shadowBlur: number;
+  shadowOffsetX: number;
+  shadowOffsetY: number;
   
   onUpdateShapeMask(){
     this.utilService.onUpdateShapeMask(

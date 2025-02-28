@@ -4,29 +4,37 @@ import {UtilService} from '../../util.service';
 @Component({
   selector: 'app-filter-tools',
   templateUrl: './filter-tools.component.html',
-  styleUrls: ['./filter-tools.component.css']
+  styleUrls: ['./filter-tools.component.css'],
+  standalone: false
 })
 export class FilterToolsComponent implements OnInit {
 
-  @Input() selectedToolType;
-  @Input() activeObjectProps;
+  @Input() selectedToolType: any;
+  @Input() activeObjectProps: any;
 
-  private filterScope:string;
-  private panelType:string;
-  private filterValues:any;
+  filterScope!:string;
+  panelType:string;
+  filterValues:any;
 
+  formatLabel(value: number): string {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + 'k';
+    }
+
+    return `${value}`;
+  }
   onPanelChange(panelType:string):void{
     this.panelType = panelType;
   }
 
-  toggleScope(filterScope){
+  toggleScope(filterScope: any){
     this.filterScope = filterScope;
     if(this.filterScope === 'ALL'){
       this.utilService.canvasCommand('FILTER:ALL',{});
     }
   }
 
-  togglePreset(presetType):void{
+  togglePreset(presetType: any):void{
     this.filterValues = {...this.filterValues,[`${presetType}`]:!this.filterValues[`${presetType}`]}
     this.onFilterUpdate();
   }

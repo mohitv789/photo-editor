@@ -33,7 +33,7 @@
   </div>
   <div class="photo-slider">
     <div *ngFor="let url of fileUrlList" class="thumbnail-wrapper">
-      <img [src]="url" (click)="addImageOnCanvas(url);" class="thumbnail" />
+      <img [src]="url" (click)="addImageOnCanvas(url)" class="thumbnail" />
     </div>
   </div>
 </div>

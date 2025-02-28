@@ -4,61 +4,96 @@ import {UtilService} from '../../util.service';
 @Component({
   selector: 'app-text-tools',
   templateUrl: './text-tools.component.html',
-  styleUrls: ['./text-tools.component.css']
+  styleUrls: ['./text-tools.component.css'],
+  standalone: false
 })
 export class TextToolsComponent implements OnInit {
 
   @Input() selectedToolType;
   @Input() activeObjectProps;
+  activeObject: any;
+  color:string;
+  opacity:number;
+  fontFamily:string;
+  fontSize:number;
+  fontWeight:string;
+  fontStyle:string;
+  underline:boolean;
+  linethrough:boolean;
+  textAlign:string;
+  lineHeight:number;
+  charSpacing:number;
 
-  private color:string;
-  private opacity:number;
-  private fontFamily:string;
-  private fontSize:number;
-  private fontWeight:string;
-  private fontStyle:string;
-  private underline:boolean;
-  private linethrough:boolean;
-  private textAlign:string;
-  private lineHeight:number;
-  private charSpacing:number;
+  isSelectionInactive:boolean;
 
-  private isSelectionInactive:boolean;
+  fontList = ['Roboto','Alegreya Sans'];
 
-  private fontList = ['Roboto','Alegreya Sans'];
-
-  onUpdateText():void{
-    if(this.selectedToolType === 'TEXT'){
-      this.utilService.onUpdateText(
-        {
-          color: this.color,
-          opacity: this.opacity,
-          fontFamily:this.fontFamily,
-          fontSize:this.fontSize,
-          fontWeight:this.fontWeight,
-          fontStyle:this.fontStyle,
-          underline:this.underline,
-          linethrough:this.linethrough,
-          textAlign:this.textAlign,
-          lineHeight:this.lineHeight,
-          charSpacing:this.charSpacing
-        }
-      )
-    }
-    else if( this.selectedToolType === 'TEXT:EDITING' ){
-      this.utilService.onUpdateText(
-        {
-          fill: this.color,
-          fontFamily:this.fontFamily,
-          fontSize:this.fontSize,
-          fontWeight:this.fontWeight,
-          fontStyle:this.fontStyle,
-          underline:this.underline,
-          linethrough:this.linethrough,
-        }
-      )
+  onObjectSelected(event: any) {
+    if (event.target && event.target.type === 'text') {
+      this.isSelectionInactive = false;
+      this.fontSize = event.target.fontSize;
+      this.fontFamily = event.target.fontFamily;
+      this.fontWeight = event.target.fontWeight;
+      this.fontStyle = event.target.fontStyle;
+      this.underline = event.target.underline;
+      this.linethrough = event.target.linethrough;
+      this.textAlign = event.target.textAlign;
+      this.color = event.target.fill;
+      this.lineHeight = event.target.lineHeight;
+    } else {
+      this.isSelectionInactive = true;
     }
   }
+  // onUpdateText():void{
+  //   if(this.selectedToolType === 'TEXT'){
+  //     this.utilService.onUpdateText(
+  //       {
+  //         color: this.color,
+  //         opacity: this.opacity,
+  //         fontFamily:this.fontFamily,
+  //         fontSize:this.fontSize,
+  //         fontWeight:this.fontWeight,
+  //         fontStyle:this.fontStyle,
+  //         underline:this.underline,
+  //         linethrough:this.linethrough,
+  //         textAlign:this.textAlign,
+  //         lineHeight:this.lineHeight,
+  //         charSpacing:this.charSpacing
+  //       }
+  //     )
+  //   }
+  //   else if( this.selectedToolType === 'TEXT:EDITING' ){
+  //     this.utilService.onUpdateText(
+  //       {
+  //         fill: this.color,
+  //         fontFamily:this.fontFamily,
+  //         fontSize:this.fontSize,
+  //         fontWeight:this.fontWeight,
+  //         fontStyle:this.fontStyle,
+  //         underline:this.underline,
+  //         linethrough:this.linethrough,
+  //       }
+  //     )
+  //   }
+  // }
+
+  onUpdateText() {
+    if (!this.activeObject || this.activeObject.type !== 'text') return;
+  
+    this.activeObject.set({
+      fontFamily: this.fontFamily,
+      fontWeight: this.fontWeight,
+      fontStyle: this.fontStyle,
+      underline: this.underline,
+      linethrough: this.linethrough,
+      textAlign: this.textAlign,
+      fill: this.color,
+      opacity: this.opacity,
+      fontSize: this.fontSize,
+      lineHeight: this.lineHeight,
+    });
+  }
+  
   
   toggleBold():void{
     this.fontWeight = this.fontWeight === 'normal'? 'bold' : 'normal';

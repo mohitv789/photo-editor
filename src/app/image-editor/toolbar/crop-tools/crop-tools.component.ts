@@ -4,7 +4,8 @@ import {UtilService} from '../../util.service';
 @Component({
   selector: 'app-crop-tools',
   templateUrl: './crop-tools.component.html',
-  styleUrls: ['./crop-tools.component.css']
+  styleUrls: ['./crop-tools.component.css'],
+  standalone: false
 })
 export class CropToolsComponent implements OnInit {
 

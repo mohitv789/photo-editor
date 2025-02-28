@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {MatSnackBar} from '@angular/material';
-import { Subscription }   from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { UtilService } from './util.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-image-editor',
   templateUrl: './image-editor.component.html',
-  styleUrls: ['./image-editor.component.css']
+  styleUrls: ['./image-editor.component.css'],
+  standalone: false
 })
 export class ImageEditorComponent implements OnInit {
   // ------------------------------- subscribtion ------------------------------

@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import {UtilService} from '../util.service'
-import { Subscription }   from 'rxjs/Subscription';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
+
+
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.css']
+  styleUrls: ['./toolbar.component.css'],
+  standalone: false
 })
 export class ToolbarComponent implements OnInit {
   
-  private selectedToolTypeList:string[] = [
+  selectedToolTypeList:string[] = [
     'MAIN',
     'TEXT',
     'TEXT:EDITING',
@@ -23,14 +24,14 @@ export class ToolbarComponent implements OnInit {
     'PEN',
     'DEACTIVATE'
   ];
-  private selectedToolType:string;
-  private activeObjectProps:any;
-  private selection:any;
-  private selectionType:string;
+  selectedToolType:string;
+  activeObjectProps:any;
+  selection:any;
+  selectionType:string;
 
   // ---------------------------- Subscription ------------------------------
-  private onChangeToolTypeSubscription:Subscription;
-  private onSelectionCreatedSubscription:Subscription;
+  onChangeToolTypeSubscription:Subscription;
+  onSelectionCreatedSubscription:Subscription;
 
   onChangeToolType(toolType:string):void {
     this.selectedToolType = toolType;

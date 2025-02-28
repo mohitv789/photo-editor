@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Subject }    from 'rxjs/Subject';
+import { Subject } from 'rxjs';
+
 
 @Injectable()
 export class UtilService {
-
+  editedImageURL: any;
+  uploadedId: string = "";
   // --------------------- Add Image To Canvas ------------------------------
   private addImageToCanvasSource = new Subject<any>();
   addImageToCanvas$ = this.addImageToCanvasSource.asObservable();
