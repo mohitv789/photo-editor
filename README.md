@@ -1,3 +1,5 @@
+MODIFIED FOR ANGULAR 19
+
 # Photo-Chrome
 
 A fully fledged web based photo editor.
