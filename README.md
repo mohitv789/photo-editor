@@ -1,1 +1,1 @@
-Modified for ANgular 19
+Modified for Angular 19
